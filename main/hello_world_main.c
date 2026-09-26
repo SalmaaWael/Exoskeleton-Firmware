@@ -3,29 +3,29 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// هيكل بيانات الـ Exoskeleton (BLE Payload)
-// استخدام (packed) ضروري جداً لضمان تطابق حجم البيانات عند استلامها في الموبايل أبلكيشن
+// Exoskeleton Data Structure (BLE Payload)
+// Using (packed) is essential to ensure the data size matches exactly when received by the mobile application
 typedef struct __attribute__((packed)) {
-    uint8_t start_byte;        // بايت البداية للتأكد من سلامة الحزمة (مثلاً 0xAA)
+    uint8_t start_byte;        // Start byte to verify packet integrity (e.g., 0xAA)
     
-    // بيانات الحساسات (Sensors)
-    float left_knee_angle;     // زاوية الركبة اليسرى (IMU)
-    float right_knee_angle;    // زاوية الركبة اليمنى (IMU)
-    uint16_t left_fsr_value;   // قوة الضغط على القدم اليسرى (FSR)
-    uint16_t right_fsr_value;  // قوة الضغط على القدم اليمنى (FSR)
+    // Sensors Data
+    float left_knee_angle;     // Left knee angle (IMU)
+    float right_knee_angle;    // Right knee angle (IMU)
+    uint16_t left_fsr_value;   // Left foot pressure force (FSR)
+    uint16_t right_fsr_value;  // Right foot pressure force (FSR)
     
-    // حالة المواتير (Motors)
-    bool is_left_motor_active; // حالة الموتور الأيسر
-    bool is_right_motor_active;// حالة الموتور الأيمن
+    // Motors Status
+    bool is_left_motor_active; // Left motor status
+    bool is_right_motor_active;// Right motor status
     
-    // حالة النظام (System Status)
-    uint8_t battery_level;     // نسبة البطارية (0-100)
-    uint8_t system_error_code; // كود الأخطاء (0 يعني لا يوجد خطأ)
+    // System Status
+    uint8_t battery_level;     // Battery percentage (0-100)
+    uint8_t system_error_code; // Error code (0 means no error)
     
-    uint8_t end_byte;          // بايت النهاية (مثلاً 0x55)
+    uint8_t end_byte;          // End byte (e.g., 0x55)
 } ExoskeletonData_t;
 
-// إنشاء نسخة من الهيكل عشان نحدثها جوه المهام
+// Create an instance of the struct to be updated within the tasks
 ExoskeletonData_t exo_data = {
     .start_byte = 0xAA,
     .end_byte = 0x55,
@@ -34,24 +34,24 @@ ExoskeletonData_t exo_data = {
 
 #include "freertos/task.h"
 
-// 1. مهمة قراءة الحساسات
+// 1. Task to read sensors
 void vTaskReadSensors(void *pvParameters) {
     while(1) {
         vTaskDelay(50 / portTICK_PERIOD_MS); 
     }
 }
 
-// 2. مهمة التحكم في المواتير (قرارات الحركة)
+// 2. Task to control motors (Movement decisions)
 void vTaskMotorControl(void *pvParameters) {
     while(1) {
         vTaskDelay(20 / portTICK_PERIOD_MS); 
     }
 }
 
-// 3. مهمة البلوتوث (إرسال البيانات للموبايل)
+// 3. Bluetooth Task (Sending data to the mobile app)
 void vTaskBLE_Comms(void *pvParameters) {
     while(1) {
-        vTaskDelay(200 / portTICK_PERIOD_MS); 
+        vTaskDelay(2000 / portTICK_PERIOD_MS); 
     }
 }
 
