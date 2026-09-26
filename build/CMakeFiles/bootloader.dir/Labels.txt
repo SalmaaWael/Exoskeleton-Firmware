@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/computer science/Graduation/workspace/build/CMakeFiles/bootloader
+D:/computer science/Graduation/workspace/build/CMakeFiles/bootloader.rule
+D:/computer science/Graduation/workspace/build/CMakeFiles/bootloader-complete.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/computer science/Graduation/workspace/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
